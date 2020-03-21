@@ -17,6 +17,14 @@ public class ContestOrganizer {
 	 * @param arr the array to be sorted.*/
 	public void sort(Contestant[] arr){
 		/* code goes here */
+		int lowestScore = Integer.MAX_VALUE;
+		
+		for(int i=0; i<arr.length; i++) {
+			if(arr[i].getScore()<lowestScore) {
+				lowestScore = arr[i].getScore();
+				arr[i].updateLocation(i, 0);
+			}
+		}
 	}
 	
 	/** Sorts each row of contestants into increasing order by score.
@@ -24,6 +32,10 @@ public class ContestOrganizer {
 	 * 				  in the rightmost column of row[k], 0 <= k < NUM_ROWS */
 	public void sortAllRows(){
 		/* code goes here */ 
+		for(Contestant[] row : contestants) {
+			sort(row);
+		}
+		
 	}
 
 	/** Returns name of contestant with highest score
@@ -34,7 +46,18 @@ public class ContestOrganizer {
 	 * @return name of contestant with highest score. */
 	public String findWinnerName(){
 		/* code goes here */
+		sortAllRows();
+		String winner = "";
+		int maxScore = 0;
+		int lastColumn = contestants.length-1;
 		
-		return "";
+		for(int i=0; i<contestants.length; i++) {
+			if(contestants[i][lastColumn].getScore() > maxScore) {
+				winner = contestants[i][lastColumn].getName();
+				maxScore = contestants[i][lastColumn].getScore();
+			}
+		}
+		
+		return winner;
 	}
 }

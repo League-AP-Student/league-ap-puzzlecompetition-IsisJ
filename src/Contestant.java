@@ -30,6 +30,7 @@ public class Contestant {
 	 *  @param newCol the new column */
 	public void updateLocation(int newRow, int newCol){
 		/* code goes here */
+		loc = new Location(newRow, newCol);
 	}
 	
 	public Contestant(int r, int c){
